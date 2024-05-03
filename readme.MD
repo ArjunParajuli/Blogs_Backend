@@ -1,0 +1,1 @@
+- We have three models for the collections post, like and comments. These collections will reference each other using the id of the document.
