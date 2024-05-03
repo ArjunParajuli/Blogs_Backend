@@ -10,17 +10,17 @@ const createComment = async (req, res) => {
             postId, user, body
         });
 
-        // save the comment object in the database
+        // save the new comment object in the database
         const savedComment = await comment.save();
-        console.log(savedComment);
 
-        // Find the particular post in posts collection(find using postId) and add this comment to that post's comments array
+        // Find the particular post in posts collection(find using postId) and add this comment's id to that post's comments array
         const updatedPost = await Post.findByIdAndUpdate(
             postId,
             { $push: { comments: savedComment._id } },
             { new: true }
-        ).populate("comments").exec();
-        // new:true returns the updated post
+        ).populate("comments").exec(); 
+        // populate karnese id ki jagah "comments" aajayenge in the updatedPost object (comments is array of object in Post collection)
+        // {new:true} makes it return the updated post
 
         // Send the updated post in the response
         return res.json({ post: updatedPost });
