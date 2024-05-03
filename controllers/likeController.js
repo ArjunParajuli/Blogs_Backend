@@ -36,7 +36,7 @@ exports.removeLike = async(req, res) =>{
         const updatedLike = await Like.findOneAndDelete({ postId: postId, _id: likeId }); // wo doc delete karo jisme parameters match karte hai
 
         // post collection mai delete karo
-        const updatedPost = await Post.findByIdAndUpdate(postId, {$pull: {likes: updatedLike._id}}, {new: true }) // delete 
+        const updatedPost = await Post.findByIdAndUpdate(postId, {$pull: {likes: updatedLike._id}}, {new: true }) // delete the post whose likes array has matching likeid 
 
         res.json({updatedPost: updatedPost})
     }catch(err){
